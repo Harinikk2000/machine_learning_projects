@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SMS Spam Classifier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body 
+
+    style = "   
+            display: flex; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh; 
+            align-items: center; 
+            justify-content: center; 
+            flex-direction: column; 
+            text-align: center; 
+            background: #add8e6;
+            " >
+    <div class="container">
+    <div class="row">
+    <div class="col-5">   
+    <h1>SMS Spam Classifier</h1>
+    <br>
+
+    <form action="{{ url_for('predict')}}" method="POST">
+
+        <input name="message" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Enter your SMS here">
+        
+        <br/>
+        
+        <button type="submit" class="btn btn-success">Predict</button>
+    
+    </form>
+	<br>
+	<br>
+	
+	</div>
+	<div class="col-5">
+	<br>
+	<br>
+	<br>
+	
+	{% if prediction == 0%}
+        
+        <h1 style="color:red;">Spam <span>&#9888;</span></h1>
+		<br>
+	{% elif prediction == 1%}
+        
+        <h1 style="color:green;">Ham !!</h1>
+		<br>
+	{% elif prediction == 2%}
+        
+        <h1 style="color:#3b3595;">No SMS provided :( </h1>
+		<br>
+    {% endif %}
+    <br>
+	<br>
+	<br>
+	<br>
+	
+	
+	</div>	
+    </div>
+	
+
+<div class="container">
+    <div class="row">
+    <div class="col-6">
+	<hr>
+    <h3 class="text-centre"><u>SPAM</u></h3><br>
+        {% if prediction == 0%}
+        <br>
+		{% for object in s1 %}
+        <h6 style="color:blue;"> {{ object }} </h6> 
+			{% endfor %}
+			{% endif %}
+    <br>
+	</div>
+
+
+<div class="col-6">
+	<hr>
+    <h3 class="text-centre"><u>HAM</u></h3><br>
+		{% if prediction == 1%}
+        <br>
+		{% for object in h1 %}
+
+        <h6 style="color:blue;"> {{ object }} </h6>
+        {% endfor %}
+		{% endif %}
+    
+    <br>
+</div>
+
+
+</div>
+</div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+    src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
